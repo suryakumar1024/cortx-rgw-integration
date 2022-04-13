@@ -162,7 +162,7 @@ class Rgw:
         print(decoded_out)
         print('*'*25)
         f = open("/tmp/demofile3.txt", "w+")
-        f.write(decoded_out)
+        f.write(str(decoded_out))
         f.close()
         Log.info('Starting radosgw service.')
         log_file = os.path.join(log_path, f'{const.COMPONENT_NAME}_startup.log')
