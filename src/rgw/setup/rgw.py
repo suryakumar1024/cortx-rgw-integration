@@ -150,6 +150,17 @@ class Rgw:
         motr_trace_dir = os.path.join(log_path, 'motr_trace_files')
         os.makedirs(motr_trace_dir, exist_ok=True)
 
+        # Create ADDB stob location
+        # Rgw._verify_backend_store_value(conf)
+        motr_addb_dir = os.path.join(motr_trace_dir, 'addb-stob')
+        os.makedirs(motr_addb_dir, exist_ok=True)
+
+        hare_config_dir = Rgw._get_hare_config_path(conf)
+        fetch_fids_cmd = f'hctl fetch-fids -c {hare_config_dir}'
+        decoded_out = Rgw._run_fetch_fid_cmd(fetch_fids_cmd)
+        print('*'*25)
+        print(decoded_out)
+        print('*'*25)
         Log.info('Starting radosgw service.')
         log_file = os.path.join(log_path, f'{const.COMPONENT_NAME}_startup.log')
         config_file = Rgw._get_rgw_config_path(conf)
